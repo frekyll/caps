@@ -1,0 +1,23 @@
+{
+  "name": "caps",
+  "version": "1.0.0",
+  "description": "Capitalize headings",
+  "main": "main.js",
+  "scripts": {
+    "build": "browserify -p tinyify main.js -o bundle.js",
+    "test": "standard main.js",
+    "watch": "watchify main.js -o bundle.js"
+  },
+  "author": "Joshua Wenning",
+  "private": true,
+  "license": "MIT",
+  "dependencies": {
+    "capitalize-title": "^1.0.0"
+  },
+  "devDependencies": {
+    "browserify": "^17.0.0",
+    "standard": "^16.0.3",
+    "tinyify": "^3.0.0",
+    "watchify": "^3.11.1"
+  }
+}

@@ -1,2 +1,2 @@
 # caps
-Capitalize headings
+> Capitalize headings
