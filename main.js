@@ -23,7 +23,7 @@ var containerStyle = css`
   :host {
     margin-left: auto;
     margin-right: auto;
-    max-width: 60em;
+    max-width: 40em;
     padding: 2rem;
   }
 
@@ -56,6 +56,7 @@ var formStyle = css`
 
   :host textarea {
     line-height: 1.5;
+    resize: none;
   }
 `
 
