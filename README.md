@@ -1,0 +1,2 @@
+# caps
+Capitalize headings
