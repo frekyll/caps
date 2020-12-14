@@ -4,9 +4,9 @@
   "description": "Capitalize headings",
   "main": "main.js",
   "scripts": {
-    "build": "browserify -p tinyify main.js -o bundle.js",
+    "build": "browserify -t sheetify -p tinyify main.js -o bundle.js",
     "test": "standard main.js",
-    "watch": "watchify main.js -o bundle.js"
+    "watch": "watchify -t sheetify main.js -o bundle.js"
   },
   "author": "Joshua Wenning",
   "private": true,
@@ -16,6 +16,8 @@
   },
   "devDependencies": {
     "browserify": "^17.0.0",
+    "nanohtml": "^1.9.1",
+    "sheetify": "^8.0.0",
     "standard": "^16.0.3",
     "tinyify": "^3.0.0",
     "watchify": "^3.11.1"
