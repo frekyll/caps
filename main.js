@@ -15,19 +15,19 @@ var containerStyle = css`
   }
 
   :root {
-    --background: rgb(255, 230, 230);
-    --border-state: rgb(75, 75, 75);
-    --border: rgb(150, 150, 150);
-    --link: rgb(215, 45, 45);
-    --text: rgb(75, 75, 75);
+    --background: #fee;
+    --border-state: #444;
+    --border: #999;
+    --link: #d33;
+    --text: #333;
   }
 
   .theme {
-    --background: rgb(25, 25, 25);
-    --border-state: rgb(255, 175, 175);
-    --border: rgb(255, 255, 255);
-    --link: rgb(255, 175, 175);
-    --text: rgb(255, 255, 255);
+    --background: #222;
+    --border-state: #faa;
+    --border: #fff;
+    --link: #faa;
+    --text: #fff;
   }
 
   body {
