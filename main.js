@@ -3,9 +3,9 @@
 var capitalizeTitle = require('capitalize-title')
 var css = require('sheetify')
 var html = require('nanohtml')
-var package = require('./package.json')
+var pjson = require('./package.json')
 
-var pageTitle = `caps • ${package.description}`
+var pageTitle = `caps • ${pjson.description}`
 
 document.title = pageTitle
 
@@ -121,7 +121,7 @@ var copyButton = html`<button onclick=${copyOutput}>Copy</button>`
 
 var header = html`
   <header class=${headerStyle}>
-    <h1>caps <span>v${package.version}</span></h1>
+    <h1>caps <span>v${pjson.version}</span></h1>
     <nav>
       <a href="https://github.com/frekyll/caps">GitHub</a>
     </nav>
