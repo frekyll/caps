@@ -1,10 +1,11 @@
 /* eslint-disable no-var */
 
+var capitalizeTitle = require('capitalize-title')
 var css = require('sheetify')
 var html = require('nanohtml')
-var capitalizeTitle = require('capitalize-title')
+var package = require('./package.json')
 
-var pageTitle = 'Caps - Capitalize headings'
+var pageTitle = `caps • ${package.description}`
 
 document.title = pageTitle
 
@@ -15,8 +16,9 @@ var containerStyle = css`
 
   :root {
     --bg-color: rgb(255, 230, 230);
+    --text-color-accent: rgb(150, 150, 150);
+    --text-color-link: rgb(215, 45, 45);
     --text-color: rgb(75, 75, 75);
-    --text-color-accent: rgb(125, 125, 125);
   }
 
   body {
@@ -32,13 +34,6 @@ var containerStyle = css`
     max-width: 40em;
     padding: 2rem;
   }
-
-  :host h1 {
-    font-size: 1.5rem;
-    font-weight: normal;
-    margin-bottom: 2rem;
-    margin-top: 0;
-  }
 `
 
 var formStyle = css`
@@ -49,7 +44,7 @@ var formStyle = css`
 
   :host input,
   :host textarea {
-    border: 1px solid var(--text-color-accent);
+    border: 2px solid var(--text-color-accent);
     display: block;
     font-family: palatino, georgia, serif;
     font-size: 1.5rem;
@@ -63,11 +58,13 @@ var formStyle = css`
   }
 
   :host textarea {
+    -webkit-appearance: none;
     border-bottom-left-radius: .25rem;
     border-right: 0;
     border-top-left-radius: .25rem;
     line-height: 1.5;
     resize: none;
+    z-index: 1;
   }
 
   :host div {
@@ -78,12 +75,11 @@ var formStyle = css`
     background-color: #fff;
     border-bottom-right-radius: .25rem;
     border-top-right-radius: .25rem;
-    border: 1px solid var(--text-color-accent);
+    border: 2px solid var(--text-color-accent);
     color: var(--text-color-accent);
     cursor: pointer;
-    font-family: 'helvetica neue', arial, sans-serif;
     font-size: .875rem;
-    line-height: 1.5;
+    line-height: 1;
     margin: 0;
     padding: .5rem 1rem;
   }
@@ -94,9 +90,43 @@ var formStyle = css`
   }
 `
 
+var headerStyle = css`
+  :host {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 4rem;
+  }
+
+  :host h1 {
+    font-size: 1.5rem;
+    margin: 0;
+  }
+
+  :host h1 span {
+    color: var(--text-color-accent);
+    font-family: system-ui, sans-serif;
+    font-size: .875rem;
+    font-weight: normal;
+  }
+
+  :host a {
+    color: var(--text-color-link);
+  }
+`
+
 var output = html`<textarea readonly></textarea>`
 
 var copyButton = html`<button onclick=${copyOutput}>Copy</button>`
+
+var header = html`
+  <header class=${headerStyle}>
+    <h1>caps <span>v${package.version}</span></h1>
+    <nav>
+      <a href="https://github.com/frekyll/caps">GitHub</a>
+    </nav>
+  </header>
+`
 
 var form = html`
   <div class=${formStyle}>
@@ -112,7 +142,7 @@ var form = html`
 
 var container = html`
   <div class="${containerStyle}">
-    <h1>${pageTitle}</h1>
+    ${header}
     ${form}
   </div>
 `
