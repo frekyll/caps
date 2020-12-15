@@ -52,16 +52,19 @@ var formStyle = css`
     width: 100%;
   }
 
-  :host input {
+  :host input[type=text] {
+    -webkit-appearance: none;
+    appearance: none;
     margin-bottom: 1rem;
     border-radius: .25rem;
   }
 
   :host textarea {
-    -webkit-appearance: none;
     border-bottom-left-radius: .25rem;
-    border-right: 0;
+    border-right: hidden;
     border-top-left-radius: .25rem;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
     line-height: 1.5;
     resize: none;
     z-index: 1;
