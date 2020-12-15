@@ -132,26 +132,6 @@ var headerStyle = css`
     margin-left: .75rem;
     text-decoration: none;
   }
-
-  :host a:last-of-type {
-    background-color: var(--background);
-    border-radius: .25rem;
-    border: .125rem solid var(--border);
-    color: var(--border);
-    display: inline-block;
-    font-size: .875rem;
-    font-size: 1rem;
-    height: 2rem;
-    line-height: 1.25;
-    padding: .25rem;
-    text-align: center;
-    width: 2rem;
-  }
-
-  :host a:last-of-type:hover {
-    color: var(--border-state);
-    border-color: var(--border-state);
-  }
 `
 
 var output = html`<textarea readonly></textarea>`
@@ -163,7 +143,7 @@ var header = html`
     <h1>caps <span>v${pjson.version}</span></h1>
     <nav>
       <a href="https://github.com/frekyll/caps">GitHub</a>
-      <a href="#" onclick=${changeTheme}>☽</a>
+      <a href="#" onclick=${changeTheme}>🌗</a>
     </nav>
   </header>
 `
