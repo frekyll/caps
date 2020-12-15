@@ -1,7 +1,7 @@
 {
   "name": "caps",
-  "version": "1.0.0",
-  "description": "Capitalize headings",
+  "version": "0.1.0",
+  "description": "Capitalize titles in the browser",
   "main": "main.js",
   "scripts": {
     "build": "browserify -t sheetify -p tinyify main.js -o bundle.js",

@@ -1,2 +1,2 @@
 # caps
-> Capitalize headings
+> Capitalize titles in the browser
