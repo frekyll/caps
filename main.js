@@ -15,24 +15,37 @@ var containerStyle = css`
   }
 
   :root {
-    --bg-color: rgb(255, 230, 230);
-    --text-color-accent: rgb(150, 150, 150);
-    --text-color-link: rgb(215, 45, 45);
-    --text-color: rgb(75, 75, 75);
+    --background: rgb(255, 230, 230);
+    --border-state: rgb(75, 75, 75);
+    --border: rgb(150, 150, 150);
+    --link: rgb(215, 45, 45);
+    --text: rgb(75, 75, 75);
+  }
+
+  .theme {
+    --background: rgb(25, 25, 25);
+    --border-state: rgb(255, 175, 175);
+    --border: rgb(255, 255, 255);
+    --link: rgb(255, 175, 175);
+    --text: rgb(255, 255, 255);
   }
 
   body {
-    background-color: var(--bg-color);
-    color: var(--text-color);
     font-family: palatino, georgia, serif;
     margin: 0;
   }
 
   :host {
+    background-color: var(--background);
+    color: var(--text);
+    height: 100vh;
+    padding: 2rem;
+  }
+
+  :host div {
     margin-left: auto;
     margin-right: auto;
     max-width: 40em;
-    padding: 2rem;
   }
 `
 
@@ -44,7 +57,9 @@ var formStyle = css`
 
   :host input,
   :host textarea {
-    border: 2px solid var(--text-color-accent);
+    background-color: var(--background);
+    border: 2px solid var(--border);
+    color: var(--text);
     display: block;
     font-family: palatino, georgia, serif;
     font-size: 1.5rem;
@@ -53,8 +68,8 @@ var formStyle = css`
   }
 
   :host input {
-    margin-bottom: 1rem;
     border-radius: .25rem;
+    margin-bottom: 1rem;
   }
 
   :host textarea {
@@ -63,7 +78,8 @@ var formStyle = css`
     border-right: hidden;
     border-top-left-radius: .25rem;
     border-top-right-radius: 0;
-    line-height: 1.5;
+    line-height: 1.75;
+    overflow-y: hidden;
     resize: none;
     z-index: 1;
   }
@@ -73,11 +89,11 @@ var formStyle = css`
   }
 
   :host div button {
-    background-color: #fff;
+    background-color: var(--background);
     border-bottom-right-radius: .25rem;
     border-top-right-radius: .25rem;
-    border: 2px solid var(--text-color-accent);
-    color: var(--text-color-accent);
+    border: 2px solid var(--border);
+    color: var(--border);
     cursor: pointer;
     font-size: .875rem;
     line-height: 1;
@@ -86,8 +102,8 @@ var formStyle = css`
   }
 
   :host div button:hover {
-    border-color: var(--text-color);
-    color: var(--text-color);
+    border-color: var(--border-state);
+    color: var(--border-state);
   }
 `
 
@@ -105,14 +121,36 @@ var headerStyle = css`
   }
 
   :host h1 span {
-    color: var(--text-color-accent);
+    color: var(--border-state);
     font-family: system-ui, sans-serif;
     font-size: .875rem;
     font-weight: normal;
   }
 
   :host a {
-    color: var(--text-color-link);
+    color: var(--link);
+    margin-left: .75rem;
+    text-decoration: none;
+  }
+
+  :host a:last-of-type {
+    background-color: var(--background);
+    border-radius: .25rem;
+    border: .125rem solid var(--border);
+    color: var(--border);
+    display: inline-block;
+    font-size: .875rem;
+    font-size: 1rem;
+    height: 2rem;
+    line-height: 1.25;
+    padding: .25rem;
+    text-align: center;
+    width: 2rem;
+  }
+
+  :host a:last-of-type:hover {
+    color: var(--border-state);
+    border-color: var(--border-state);
   }
 `
 
@@ -125,6 +163,7 @@ var header = html`
     <h1>caps <span>v${pjson.version}</span></h1>
     <nav>
       <a href="https://github.com/frekyll/caps">GitHub</a>
+      <a href="#" onclick=${changeTheme}>☽</a>
     </nav>
   </header>
 `
@@ -143,8 +182,10 @@ var form = html`
 
 var container = html`
   <div class="${containerStyle}">
-    ${header}
-    ${form}
+    <div>
+      ${header}
+      ${form}
+    </div>
   </div>
 `
 
@@ -158,4 +199,9 @@ function copyOutput (e) {
   output.select()
   output.select(0, 99999)
   document.execCommand('copy')
+}
+
+function changeTheme (e) {
+  e.preventDefault()
+  container.classList.toggle('theme')
 }
