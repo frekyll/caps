@@ -1,77 +1,64 @@
 /* eslint-disable no-var */
 
-var capitalizeTitle = require('capitalize-title')
 var css = require('sheetify')
 var html = require('nanohtml')
-var pjson = require('./package.json')
+var titleCase = require('capitalize-title')
 
-var pageTitle = `caps • ${pjson.description}`
+var meta = html`
+  <meta content='width=device-width, initial-scale=1' name='viewport'>
+  <title>caps - Capitalize titles in the browser</title>
+`
 
-document.title = pageTitle
+document.head.appendChild(meta)
 
-var containerStyle = css`
+var globalStyle = css`
+  :root {
+    --background: #eee;
+    --border: #fff;
+    --link-state: #c33;
+    --text: #333;
+  }
   * {
     box-sizing: border-box;
   }
-
-  :root {
-    --background: #fee;
-    --border-state: #444;
-    --border: #999;
-    --link: #d33;
-    --text: #333;
-  }
-
-  .theme {
-    --background: #222;
-    --border-state: #faa;
-    --border: #fff;
-    --link: #faa;
-    --text: #fff;
-  }
-
-  body {
-    font-family: palatino, georgia, serif;
-    margin: 0;
-  }
-
   :host {
     background-color: var(--background);
     color: var(--text);
-    height: 100vh;
-    padding: 2rem;
+    font-family: system-ui, helvetica, sans-serif;
+    margin: 0;
+    padding: 1rem;
   }
+  .theme {
+    --background: #111;
+    --link-state: #ddd;
+    --text: #fff;
+  }
+`
 
-  :host div {
+document.body.classList.add(`${globalStyle}`)
+
+var formStyle = css`
+  :host {
     margin-left: auto;
     margin-right: auto;
     max-width: 40em;
   }
-`
-
-var formStyle = css`
   :host label {
     display: block;
     margin-bottom: .5rem;
   }
-
   :host input,
   :host textarea {
-    background-color: var(--background);
     border: 2px solid var(--border);
-    color: var(--text);
     display: block;
-    font-family: palatino, georgia, serif;
     font-size: 1.5rem;
     height: 3rem;
     width: 100%;
   }
-
   :host input {
     border-radius: .25rem;
     margin-bottom: 1rem;
   }
-
   :host textarea {
     border-bottom-left-radius: .25rem;
     border-bottom-right-radius: 0;
@@ -83,70 +70,57 @@ var formStyle = css`
     resize: none;
     z-index: 1;
   }
-
   :host div {
     display: flex;
   }
-
   :host div button {
     background-color: var(--background);
     border-bottom-right-radius: .25rem;
     border-top-right-radius: .25rem;
     border: 2px solid var(--border);
-    color: var(--border);
+    color: var(--text);
     cursor: pointer;
     font-size: .875rem;
     line-height: 1;
     margin: 0;
     padding: .5rem 1rem;
   }
-
-  :host div button:hover {
-    border-color: var(--border-state);
-    color: var(--border-state);
-  }
 `
 
 var headerStyle = css`
   :host {
-    align-items: center;
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 4rem;
+    margin-bottom: 8rem;
   }
-
   :host h1 {
-    font-size: 1.5rem;
-    margin: 0;
+    font-weight: 600;
+    margin-bottom: .5rem;
+    margin-top: 0;
   }
-
-  :host h1 span {
-    color: var(--border-state);
-    font-family: system-ui, sans-serif;
-    font-size: .875rem;
-    font-weight: normal;
+  :host nav {
+    display: block;
   }
-
   :host a {
-    color: var(--link);
-    margin-left: .75rem;
-    text-decoration: none;
+    color: var(--text);
+    margin-right: .75rem;
   }
+  :host a:hover {
+    color: var(--link-state);
+  }
+`
+
+var header = html`
+  <header class=${headerStyle}>
+    <h1>caps</h1>
+    <nav>
+      <a href="https://github.com/frekyll/caps">View on GitHub</a>
+      <a href onclick=${changeTheme}>Toggle Theme</a>
+    </nav>
+  </header>
 `
 
 var output = html`<textarea readonly></textarea>`
 
 var copyButton = html`<button onclick=${copyOutput}>Copy</button>`
-
-var header = html`
-  <header class=${headerStyle}>
-    <h1>caps <span>v${pjson.version}</span></h1>
-    <nav>
-      <a href="https://github.com/frekyll/caps">GitHub</a>
-      <a href="#" onclick=${changeTheme}>🌗</a>
-    </nav>
-  </header>
-`
 
 var form = html`
   <div class=${formStyle}>
@@ -161,18 +135,16 @@ var form = html`
 `
 
 var container = html`
-  <div class="${containerStyle}">
-    <div>
-      ${header}
-      ${form}
-    </div>
+  <div>
+    ${header}
+    ${form}
   </div>
 `
 
 document.body.appendChild(container)
 
 function capitalize (e) {
-  output.innerText = capitalizeTitle(e.target.value)
+  output.innerText = titleCase(e.target.value)
 }
 
 function copyOutput (e) {
@@ -183,5 +155,5 @@ function copyOutput (e) {
 
 function changeTheme (e) {
   e.preventDefault()
-  container.classList.toggle('theme')
+  document.body.classList.toggle('theme')
 }
