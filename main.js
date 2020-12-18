@@ -118,6 +118,8 @@ var header = html`
   </header>
 `
 
+var input = html`<input oninput=${format} onkeyup=${capitalize} type='text'>`
+
 var output = html`<textarea readonly></textarea>`
 
 var copyButton = html`<button onclick=${copyOutput}>Copy</button>`
@@ -125,7 +127,7 @@ var copyButton = html`<button onclick=${copyOutput}>Copy</button>`
 var form = html`
   <div class=${formStyle}>
     <label>Input:</label>
-    <input onkeyup=${capitalize} type="text">
+      ${input}
     <label>Output:</label>
     <div>
       ${output}
@@ -142,6 +144,15 @@ var container = html`
 `
 
 document.body.appendChild(container)
+
+function format (e) {
+  e.target.value = e.target.value
+    .replace(/[\u2013]/g, '-') // En dash
+    .replace(/[\u2014]/g, '--') // Em dash
+    .replace(/[\u2018\u2019]/g, "'") // Single quotes
+    .replace(/[\u201C\u201D]/g, '"') // Double quotes
+    .replace(/[\u2022]/g, '*') // Bullet
+}
 
 function capitalize (e) {
   output.innerText = titleCase(e.target.value)
