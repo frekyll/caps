@@ -1,6 +1,6 @@
 {
   "name": "caps",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "Capitalize titles in the browser",
   "main": "main.js",
   "scripts": {
