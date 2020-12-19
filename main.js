@@ -118,7 +118,7 @@ var header = html`
   </header>
 `
 
-var input = html`<input oninput=${format} onkeyup=${capitalize} type='text'>`
+var input = html`<input autofocus oninput=${format} onkeyup=${capitalize} type='text'>`
 
 var output = html`<textarea readonly></textarea>`
 
@@ -159,6 +159,7 @@ function capitalize (e) {
 }
 
 function copyOutput (e) {
+  output.focus()
   output.select()
   output.select(0, 99999)
   document.execCommand('copy')
@@ -168,3 +169,13 @@ function changeTheme (e) {
   e.preventDefault()
   document.body.classList.toggle('theme')
 }
+
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'Escape') {
+    this.activeElement.blur()
+  }
+
+  if (e.ctrlKey && e.key === 'v') {
+    copyOutput()
+  }
+})
