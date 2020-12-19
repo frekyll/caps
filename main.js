@@ -16,7 +16,6 @@ var globalStyle = css`
   :root {
     --background: #eee;
     --border: #fff;
-    --link-state: #c33;
     --text: #333;
   }
   * {
@@ -31,7 +30,6 @@ var globalStyle = css`
   }
   .theme {
     --background: #111;
-    --link-state: #ddd;
     --text: #fff;
   }
 `
@@ -91,7 +89,7 @@ var formStyle = css`
 
 var headerStyle = css`
   :host {
-    margin-bottom: 8rem;
+    margin-bottom: 4rem;
   }
   :host h1 {
     font-weight: 600;
@@ -105,8 +103,21 @@ var headerStyle = css`
     color: var(--text);
     margin-right: .75rem;
   }
-  :host a:hover {
-    color: var(--link-state);
+  :host code {
+    background-color: #fff;
+    border-radius: .25rem;
+    color: #333;
+    font-family: menlo, monaco, monospace;
+    font-size: 1rem;
+    padding-left: .25rem;
+    padding-right: .25rem;
+  }
+  :host ul {
+    line-height: 1.5;
+    padding-left: 1rem;
+  }
+  :host span {
+    white-space: nowrap;
   }
 `
 
@@ -117,6 +128,10 @@ var header = html`
       <a href="https://github.com/frekyll/caps">View on GitHub</a>
       <a href onclick=${changeTheme}>Toggle Theme</a>
     </nav>
+    <ul>
+      <li>You can use the key binding <span><code>Ctrl</code> + <code>v</code></span> to copy the output.</li>
+      <li>Deselect the current field with <code>Esc</code>.</li>
+    </ul>
   </header>
 `
 
