@@ -49,6 +49,7 @@ var formStyle = css`
   }
   :host input,
   :host textarea {
+    -webkit-appearance: none;
     border: 2px solid var(--border);
     display: block;
     font-size: 1.5rem;
