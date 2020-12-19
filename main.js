@@ -4,9 +4,10 @@ var css = require('sheetify')
 var html = require('nanohtml')
 var titleCase = require('capitalize-title')
 
+document.title = 'caps - Capitalize titles in the browser'
+
 var meta = html`
   <meta content='width=device-width, initial-scale=1' name='viewport'>
-  <title>caps - Capitalize titles in the browser</title>
 `
 
 document.head.appendChild(meta)
