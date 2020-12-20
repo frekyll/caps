@@ -4,7 +4,7 @@ var css = require('sheetify')
 var html = require('nanohtml')
 var titleCase = require('capitalize-title')
 
-document.title = 'caps - Capitalize titles in the browser'
+document.title = 'Capitalize titles in the browser'
 
 var meta = html`
   <meta content='width=device-width, initial-scale=1' name='viewport'>
@@ -14,7 +14,7 @@ document.head.appendChild(meta)
 
 var globalStyle = css`
   :root {
-    --background: #eee;
+    --background: #ecdb83;
     --border: #fff;
     --text: #333;
   }
@@ -24,13 +24,9 @@ var globalStyle = css`
   :host {
     background-color: var(--background);
     color: var(--text);
-    font-family: system-ui, helvetica, sans-serif;
+    font-family: 'hoefler text', 'bitstream charter', georgia, serif;
     margin: 0;
     padding: 1rem;
-  }
-  .theme {
-    --background: #111;
-    --text: #fff;
   }
 `
 
@@ -49,89 +45,100 @@ var formStyle = css`
   :host input,
   :host textarea {
     -webkit-appearance: none;
-    border: 2px solid var(--border);
+    border: transparent;
     display: block;
-    font-size: 1.5rem;
+    font-family: menlo, monospace;
+    font-size: 1.25rem;
     height: 3rem;
+    padding-left: .5rem;
+    padding-right: .5rem;
     width: 100%;
   }
   :host input {
-    border-radius: .25rem;
+    border-radius: .75rem;
     margin-bottom: 1rem;
   }
   :host textarea {
-    border-bottom-left-radius: .25rem;
+    border-bottom-left-radius: .75rem;
     border-bottom-right-radius: 0;
     border-right: hidden;
-    border-top-left-radius: .25rem;
+    border-top-left-radius: .75rem;
     border-top-right-radius: 0;
-    line-height: 1.75;
+    line-height: 2.25;
     overflow-y: hidden;
     resize: none;
     z-index: 1;
   }
   :host div {
     display: flex;
+    margin-bottom: 2rem;
   }
   :host div button {
     background-color: var(--background);
-    border-bottom-right-radius: .25rem;
-    border-top-right-radius: .25rem;
-    border: 2px solid var(--border);
+    border-bottom-right-radius: .75rem;
+    border-top-right-radius: .75rem;
+    border: .25rem solid var(--border);
     color: var(--text);
     cursor: pointer;
-    font-size: .875rem;
+    font-family: menlo, monospace;
+    font-size: 1rem;
     line-height: 1;
     margin: 0;
     padding: .5rem 1rem;
   }
-`
-
-var headerStyle = css`
-  :host {
-    margin-bottom: 4rem;
+  :host summary {
+    border-radius: .75rem;
   }
-  :host h1 {
-    font-weight: 600;
-    margin-bottom: .5rem;
-    margin-top: 0;
-  }
-  :host nav {
-    display: block;
-  }
-  :host a {
-    color: var(--text);
-    margin-right: .75rem;
+  :host summary:hover {
+    cursor: pointer;
   }
   :host code {
     background-color: #fff;
     border-radius: .25rem;
     color: #333;
     font-family: menlo, monaco, monospace;
-    font-size: 1rem;
+    font-size: .875rem;
     padding-left: .25rem;
     padding-right: .25rem;
+    white-space: nowrap;
   }
   :host ul {
     line-height: 1.5;
     padding-left: 1rem;
   }
-  :host span {
-    white-space: nowrap;
+`
+
+var headerStyle = css`
+  :host {
+    margin-bottom: 4rem;
+    text-align: center;
+  }
+  :host h1 {
+    font-size: 3rem;
+    margin-bottom: .5rem;
+    margin-top: 0;
+  }
+  :host h2 {
+    font-size: 1.75rem;
+    margin-bottom: 0;
+    margin-top: 0;
+  }
+`
+
+var footerStyle = css`
+  :host {
+    bottom: 1rem;
+    position: absolute;
+  }
+  :host a {
+    color: var(--text);
   }
 `
 
 var header = html`
   <header class=${headerStyle}>
     <h1>caps</h1>
-    <nav>
-      <a href="https://github.com/frekyll/caps">View on GitHub</a>
-      <a href onclick=${changeTheme}>Toggle Theme</a>
-    </nav>
-    <ul>
-      <li>You can use the key binding <span><code>Ctrl</code> + <code>v</code></span> to copy the output.</li>
-      <li>Deselect the current field with <code>Esc</code>.</li>
-    </ul>
+    <h2><i>Capitalize titles in the browser</i></h2>
   </header>
 `
 
@@ -150,13 +157,29 @@ var form = html`
       ${output}
       ${copyButton}
     </div>
+    <details>
+      <summary>Instructions:</summary>
+      <ul>
+        <li>You can use the key binding <span><code>Ctrl + v</code></span> to copy the output.</li>
+        <li>Deselect the current field with <code>Esc</code>.</li>
+      </ul>
+    </details>
   </div>
+`
+
+var footer = html`
+  <footer class=${footerStyle}>
+    <nav>
+      <a href="https://github.com/frekyll/caps">View on GitHub</a>
+    </nav>
+  </footer>
 `
 
 var container = html`
   <div>
     ${header}
     ${form}
+    ${footer}
   </div>
 `
 
@@ -180,11 +203,6 @@ function copyOutput (e) {
   output.select()
   output.select(0, 99999)
   document.execCommand('copy')
-}
-
-function changeTheme (e) {
-  e.preventDefault()
-  document.body.classList.toggle('theme')
 }
 
 document.addEventListener('keydown', function (e) {
