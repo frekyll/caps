@@ -5,6 +5,10 @@ This is an experimental site built on [Browserify](http://browserify.org) techno
 
 ![](screenshot.gif)
 
+## What It Does
+- Capitalizes titles according to a defined [set of rules](https://github.com/a-axton/capitalize-title#rules)
+- Replaces special characters such as curly quotes and dashes with a plain text equivalent
+
 ## Related
 - [capitalize-title](https://github.com/a-axton/capitalize-title)
 - [slugs](https://github.com/frekyll/slugs)
