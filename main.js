@@ -17,7 +17,7 @@ var globalStyle = css`
     --color-background: #ecdb83;
     --color-border: #fff;
     --color-text: #333;
-    --font-monospace: 'menlo, monaco, monospace';
+    --font-monospace: menlo, monaco, monospace;
     --font-serif: 'hoefler text', 'bitstream charter', georgia, serif;
   }
   * {
@@ -75,7 +75,7 @@ var formStyle = css`
     display: flex;
     margin-bottom: 2rem;
   }
-  :host div button {
+  :host button {
     background-color: var(--color-background);
     border-bottom-right-radius: .75rem;
     border-top-right-radius: .75rem;
@@ -94,6 +94,10 @@ var formStyle = css`
   :host summary:hover {
     cursor: pointer;
   }
+  :host ul {
+    line-height: 1.5;
+    padding-left: 1rem;
+  }
   :host code {
     background-color: #fff;
     border-radius: .25rem;
@@ -103,10 +107,6 @@ var formStyle = css`
     padding-left: .25rem;
     padding-right: .25rem;
     white-space: nowrap;
-  }
-  :host ul {
-    line-height: 1.5;
-    padding-left: 1rem;
   }
 `
 
@@ -162,7 +162,7 @@ var form = html`
     <details>
       <summary>Instructions:</summary>
       <ul>
-        <li>You can use the key binding <span><code>Ctrl + v</code></span> to copy the output.</li>
+        <li>You can use the key binding <code>Ctrl + v</code> to copy the output.</li>
         <li>Deselect the current field with <code>Esc</code>.</li>
       </ul>
     </details>
