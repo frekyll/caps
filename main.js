@@ -14,17 +14,19 @@ document.head.appendChild(meta)
 
 var globalStyle = css`
   :root {
-    --background: #ecdb83;
-    --border: #fff;
-    --text: #333;
+    --color-background: #ecdb83;
+    --color-border: #fff;
+    --color-text: #333;
+    --font-monospace: 'menlo, monaco, monospace';
+    --font-serif: 'hoefler text', 'bitstream charter', georgia, serif;
   }
   * {
     box-sizing: border-box;
   }
   :host {
-    background-color: var(--background);
-    color: var(--text);
-    font-family: 'hoefler text', 'bitstream charter', georgia, serif;
+    background-color: var(--color-background);
+    color: var(--color-text);
+    font-family: var(--font-serif);
     margin: 0;
     padding: 1rem;
   }
@@ -47,7 +49,7 @@ var formStyle = css`
     -webkit-appearance: none;
     border: transparent;
     display: block;
-    font-family: menlo, monospace;
+    font-family: var(--font-monospace);
     font-size: 1.25rem;
     height: 3rem;
     padding-left: .5rem;
@@ -74,13 +76,13 @@ var formStyle = css`
     margin-bottom: 2rem;
   }
   :host div button {
-    background-color: var(--background);
+    background-color: var(--color-background);
     border-bottom-right-radius: .75rem;
     border-top-right-radius: .75rem;
-    border: .25rem solid var(--border);
-    color: var(--text);
+    border: .25rem solid var(--color-border);
+    color: var(--color-text);
     cursor: pointer;
-    font-family: menlo, monospace;
+    font-family: var(--font-monospace);
     font-size: 1rem;
     line-height: 1;
     margin: 0;
@@ -95,8 +97,8 @@ var formStyle = css`
   :host code {
     background-color: #fff;
     border-radius: .25rem;
-    color: #333;
-    font-family: menlo, monaco, monospace;
+    color: var(--color-text);
+    font-family: var(--font-monospace);
     font-size: .875rem;
     padding-left: .25rem;
     padding-right: .25rem;
@@ -131,7 +133,7 @@ var footerStyle = css`
     position: absolute;
   }
   :host a {
-    color: var(--text);
+    color: var(--color-text);
   }
 `
 
