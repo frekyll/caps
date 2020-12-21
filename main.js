@@ -7,7 +7,7 @@ var titleCase = require('capitalize-title')
 document.title = 'Capitalize titles in the browser'
 
 var meta = html`
-  <meta content='width=device-width, initial-scale=1' name='viewport'>
+  <meta content="width=device-width, initial-scale=1" name="viewport">
 `
 
 document.head.appendChild(meta)
@@ -144,7 +144,7 @@ var header = html`
   </header>
 `
 
-var input = html`<input autofocus oninput=${format} onkeyup=${capitalize} type='text'>`
+var input = html`<input autofocus oninput=${format} onkeyup=${capitalize} type="text">`
 
 var output = html`<textarea readonly></textarea>`
 
